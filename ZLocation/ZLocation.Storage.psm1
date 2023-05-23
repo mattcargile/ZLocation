@@ -16,7 +16,8 @@ function Get-ZLocation($Match)
     {
         # Create a new hash containing only matching locations
         $newhash = @{}
-        $Match | %{Find-Matches $hash $_} | %{$newhash.add($_, $hash[$_])}
+        # $Match could contain multiple key words that return the same path.
+        $Match | %{Find-Matches $hash $_} | %{ if( -not $newHash[$_] ) { $newhash.add($_, $hash[$_])} }
         $hash = $newhash
     }
 

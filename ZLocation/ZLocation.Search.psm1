@@ -47,7 +47,7 @@ function Start-WithPrefix {
         [Parameter(Mandatory=$true)] [string]$Path, 
         [Parameter(Mandatory=$true)] [string]$lowerPrefix
     )
-    $lowerLeaf = (Split-Path -Leaf $Path).ToLower()
+    $lowerLeaf = (Split-Path -Leaf $Path -ErrorAction 'Ignore').ToLower()
     return $lowerLeaf.StartsWith($lowerPrefix)
 }
 
@@ -56,7 +56,7 @@ function IsExactMatch {
         [Parameter(Mandatory=$true)] [string]$Path, 
         [Parameter(Mandatory=$true)] [string]$lowerPrefix
     )
-    $lowerLeaf = (Split-Path -Leaf $Path).ToLower()
+    $lowerLeaf = (Split-Path -Leaf $Path -ErrorAction 'Ignore').ToLower()
     return $lowerLeaf -eq $lowerPrefix
 }
 
@@ -117,7 +117,7 @@ function Test-FuzzyMatch {
         return $path -eq $rootQuery
     }
 
-    $leaf = Split-Path -Leaf $path
+    $leaf = Split-Path -Leaf $path -ErrorAction 'Ignore'
     return (contains -left $leaf -right $query[$n-1])
 }
 

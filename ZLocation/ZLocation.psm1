@@ -280,14 +280,14 @@ function Clear-NonExistentZLocation {
     }
 }
 
-
-if ($ModuleArguments.AddFrequentFolders) {
-    Get-FrequentFolders | ForEach-Object {
-        if (Test-Path $_) {
-            Add-ZWeight -Path $_ -Weight 0
-        }
-    }
-}
+# This appears to cause some looping logic inside the import and one can't get out of it.
+# if ($ModuleArguments.AddFrequentFolders) {
+#     Get-FrequentFolders | ForEach-Object {
+#         if (Test-Path $_) {
+#             Add-ZWeight -Path $_ -Weight 0
+#         }
+#     }
+# }
 if ($ModuleArguments.RegisterPromptHook) {
     Register-PromptHook
 }
